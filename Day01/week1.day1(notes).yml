@@ -1,0 +1,58 @@
+Agenda (28th/Mar/2026-Saturday)
+----------------------------
+9.00AM  to 9.45AM    -JS Introduction
+9.45AM  to 10.30AM   -Primitive Datatype and variables
+10.30AM to 10.45AM   -Classroom
+10.45AM to 11.00AM   -Break
+11.00AM to 12.00PM   -let vs var vs const
+12.00PM to 12.30PM   -Operators & conditional statement
+12.30PM to 12.45PM   -Classroom
+12.45PM to 1.00PM    -Recap
+
+
+Features of javascript
+----------------------------
+ -intrepreted language
+AST(parsing)-->machine code-->run directly
+  JIT -->just in time compiler
+  -->loosely coupled language
+  -->asynchronous programming
+  -->event driven architecture
+  -->Single thread -nonblocking -i/o
+
+  -->file creation 
+    .js
+    camelCase -->fileName.js, variables,methods,functions
+    PascalCase ->LoginPage -->ClassName
+    firstName
+
+    to execute the code
+     node fileName.js
+
+     name="", ''
+     age,phoneNo=>12,896389308,5.2,120.67
+
+
+     Keywords 
+     var phno=8796535899
+ 
+    declaration
+     var name   
+    assignment
+      name="Vidya"
+    redeclaration
+     var name="bharathi"
+     reassignment
+      name="Kishore"
+keywords let and const
+
+1. var vs let
+var -->allows to redeclare and reassignment
+let -->allows to reassign and not to redeclare
+
+2.scoping -visiblity of the variables
+global
+local/block
+functional
+
+function is a independent block to write reusable code
