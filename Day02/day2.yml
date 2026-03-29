@@ -1,0 +1,59 @@
+Today's Agenda
+-------------
+9.00am to 9.30am   -Hoisting
+9.30am to 10.15am  -Operators & Conditional Statements(if,switch)
+10.15am to 10.30am -classsroom
+10.30am to 11.00am -Looping statement
+11.00am to 11.20am -classroom
+11.20am to 11.35am -Break
+11.35am to 12.35pm -String
+12.35pm to 1.00pm  -Classroom
+
+
+var vs let vs const
+
+redeclaration &reassignment
+scoping
+-Hoisting
+var a
+
+
+-Operators
+
+Arithmetic --> + ,- ,%(mod)-remainder,* ,/->quotient
+comparision --> > < >= <= ,==(loose equality), !=
+=== (strict equality),++(increment),--(decrement)
+logical operators -->&&,|| ,| &  bitwise operators
+
+control Statements 
+  conditional -->yes /no -->if,if-else &switch
+  jump statement ->break and continue
+  loop statemnt-->for ,while ,do while -->for of/for in,foreach
+
+  if(condition){}else{}
+
+  switch(data){
+  case 
+  matching data 
+  break
+  }
+
+  for (let i=0;i<=10;i++){}  -->working index -->number
+  forEach
+
+
+//unknown range
+  while 
+  dowhile
+
+
+  String -->sequence of characters
+  let fname=""
+
+  stack mem
+  let fname="Udhay"
+  let firstName="Udhay"  
+  heap mem
+
+  let lName=new String("Bharathi")  ->1000
+  let lastName=new String("Bharathi")-->1002
