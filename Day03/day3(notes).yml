@@ -1,0 +1,42 @@
+Agenda:(4th April2026 -Saturday)
+-------------------------------
+9.00AM  to 9.30AM   -String methods
+9.30AM  to 10.30AM  -Array  
+10.30AM to 10.45AM  -Classroom
+10.45AM to 11.00AM  -Break 
+11.00AM to 12.00PM  -Function and Function types
+12.00PM to 12.10PM  -Break
+12.10PM to 1.10PM   -Promises ->resolve,reject,async and await
+-------------------------------------------------
+
+R -0 
+u -1 
+p-2 
+e-3 
+s-4 
+h-5 
+ -6 
+k-7 
+u-8 
+m-9  -3
+a-10 -2
+r-11 -1
+
+Functions -independent logic to perform 
+          -reusability purpose
+
+
+function syntax -->
+function functionName(parameter){
+  return statement -->
+ }
+
+ functionName()
+
+return -->use the output as in input to the other function
+            dont print anything in the console
+console.log -->print the info in the console for user verification
+
+test("",async()=>{})
+
+callback -->calling one function into other function as  parameter
