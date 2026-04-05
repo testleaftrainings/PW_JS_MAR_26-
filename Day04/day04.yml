@@ -1,0 +1,43 @@
+Agenda(5th April 2026)
+-----------------------
+Callback recap
+Promises
+Playwright Architecture
+Playwright Basic Script
+DOM-Structure
+Basic locators-css
+
+
+async and await -->pair
+To callback hell -->promise is implemented -->object 
+
+
+enter username  -->promise  -->by entered with data/throw error without next step
+enter password
+click login
+wait for sometime  -->wait 
+click applauncher    
+
+
+3 states
+Promise -->pending
+         -->fulfilled (resolved)
+        --> cancelled (Rejected)
+
+
+Install playwright
+
+npm init playwright@latest
+
+execution
+
+npx playwright test filename
+
+
+
+configuration 
+
+test level   -->high priority
+project level -->next priority
+global level  -->lowest prioirty
+
