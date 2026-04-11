@@ -1,0 +1,89 @@
+Agenda
+------
+Understanding DOM
+Basic Locators(CSS)(id,class)
+Classroom
+Basic Xpath
+Playwright locators
+Break
+Classroom
+Dropdown
+Classroom
+Advanced CSS / XPath
+
+Dom -->document object model
+right click inspect
+ctrl shift i
+moretools-->developer tool
+
+body
+  div
+    span 
+    a --link
+    label -->visible text 
+    button
+    select   -->dropdown ele  
+
+  CSS locators
+  Xpath -xml Path
+  Palywright locators
+attributes -
+  id -unique
+  name-
+  class 
+  text-->blackcolour
+
+  for
+  alt
+
+
+  css selectors
+  General syntax:
+  attributeName=attributeValue
+Id attribute:
+ syntax:
+  id=idValue
+  #idValue 
+  tagname#idValue
+  tagname[id=idValue]
+  example:
+  id=username
+  #username
+  input#username
+name attribute:
+  name=attributeValue
+class attribute:
+ class=attributeValue
+ .classAttrvalue
+link attribute: 
+  <a> href
+   text=textvalue
+   a[text=textValue] text -->black color
+  a[href=hrefValue] //least preference
+
+  text 
+numbering -->postion of the ele
+nth(index) -->index 0
+first()/last()
+
+dropdown ele
+ selectOption("locatortype",{value:""})
+  selectOption("locatortype",{index:6})
+  selectOption("locatortype",{label:""}) //multi language -->avoid using this
+ value -->attribute under <option>
+ index-->number 0 to n-1
+ label->blacktext
+
+
+ partial attributes
+ -----------------
+ <input class="button r4 wide primary" type="submit" id="Login" name="Login" value="Log In">
+ 
+ tagname[attribute^=partialAttribueValue]  first part of the  value -prefix
+ example: input[class^=button]
+
+ tagname[attribute$=partialattributeValue] -sufix of the attribute value
+ example: input[class$=primary]
+
+tagname[attribute*=partialattributeValue] -any part of the attr value
+  example: input[class*=wide] 
