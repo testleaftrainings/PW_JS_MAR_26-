@@ -1,0 +1,60 @@
+Agenda
+------
+Typescript 
+Alert 
+Frame
+
+JS ->dynamic typing
+   ->prototype 
+   ->light weight
+   ->runtime exception
+
+   Typescript -->as a superset of JS
+    -->interface,generic
+    -->static typing
+    -->heavy weight
+    -->compile time exception
+
+  install Typescript
+  global
+   - npm install -g typescript
+  local
+   - npm install --save-dev typescript
+   version 
+   tsc --version
+
+   for execution 
+    ->compile the .ts code 
+       tsc filename.ts
+        transpiled to js code 
+    ->excute(run) the .js code 
+       node filename.js
+
+  -------------------------------
+  string
+  number
+  boolean
+  array
+
+  enum -->enumeration -->defined constant
+  enum name{
+  }
+
+  --------------------------
+
+  Alert:
+   ------
+   javascript function -->event  /modal dialog
+     not allowing to act on other elements in the page without handling it 
+     not inspectable 
+
+ simple alert  -one button as ok
+ confirm alert -two buttons with ok /cancel
+ prompt alert -two button with ok/ cancel with a iput allowed to type
+
+ event listener 
+ page.on('dialog',alert=>{}) //works for all alert event
+ page.once() //working for one 
+ 
+ sweet alert/non modal dialog
+   -it is inspectable and does not allow to handle the other elements
