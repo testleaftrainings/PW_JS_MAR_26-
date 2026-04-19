@@ -1,0 +1,73 @@
+Agenda
+------
+Frame
+Windowhandle
+storagestate 
+file upload
+file download
+
+Frame -->html inside another >html
+  -->dom inside other dom
+
+Advertisements
+
+<html>
+  <html>
+   </html>
+</html>
+
+
+iframe-->inline frame
+
+frameObject
+frameLocator
+indexed based 
+
+Window admin  //admin_platform
+window as userside  /platform
+
+https://www.leafground.com/window.xhtml
+click on the Open button
+get the title of both the pages
+enter the email in the dashboard page(opened new page)
+
+
+
+      const [multiplePromises]  =await Promise.all([
+            context.waitForEvent('page'),
+              context.waitForEvent('page'),
+            page.getByText("Open Multiple",{exact:true}).click()
+        ])
+
+const [page1,page2]=await Promise.all([])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Form Link: https://forms.office.com/r/AKgeB8ZU1L
+
+
+
+
+
+
+
+
+
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_confirm
+
+locate the frame
+click on the ele try it
+handle the alert
+get the text for verification

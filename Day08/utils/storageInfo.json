@@ -1,0 +1,95 @@
+{
+  "cookies": [
+    {
+      "name": "CookieConsentPolicy",
+      "value": "***MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": 1808118914,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LSKey-c$CookieConsentPolicy",
+      "value": "***MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": 1808118914,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "BrowserId",
+      "value": "***MASKED***",
+      "domain": ".your-domain.com",
+      "path": "/",
+      "expires": 1808118914,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "session",
+      "value": "***MASKED***",
+      "domain": "login.your-domain.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid",
+      "value": "***CRITICAL_SECRET_MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid_Client",
+      "value": "***MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "clientSrc",
+      "value": "***MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "oid",
+      "value": "***MASKED***",
+      "domain": "your-domain.com",
+      "path": "/",
+      "expires": 1808118915,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://your-domain.com",
+      "localStorage": [
+        {
+          "name": "webactls",
+          "value": "***MASKED***"
+        }
+      ]
+    }
+  ]
+}
