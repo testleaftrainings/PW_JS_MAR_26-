@@ -1,0 +1,653 @@
+Today's agenda
+================
+
+09:00 to 10:30 ---> File Upload + File Download
+10:30 to 10.40 ---> Break
+10.40 to 11.10 ---> Breakout
+11.10 to 12.00 ---> Parameterization Via JSON File 
+12.00 to 12.10 ---> Break
+12.10 to 12.30 ---> Breakout 
+12.30 to 12:50 ---> Reading CSV File
+12:50 to 01:00 ---> Recap
+
+
+=================
+1. File Upload
+* Uploading files using file input elements.  
+* Working with drag-and-drop style uploads.  
+* Example: Automating resume uploads in job portals.
+
+2. File Download  
+* Automating file download process in Playwright.  
+* Setting download paths and verifying file content. 
+====================================
+Breakout Session : File upload using 
+====================================
+
+3. Reading JSON Files
+* Importing and parsing JSON test data.   
+* Best practices for maintaining test data files.
+====================================
+Breakout Session : JSON Data parameterization using Service Now Login Page
+====================================
+
+	       url1-->data[0][0]="https://dev225525.service-now.com/";
+          username1-->data[0][1]="admin";
+	  password1-->data[0][2]="KA*eu6o+6xJF";
+	       url2-->data[1][0]="https://dev353629.service-now.com/";
+	  username2-->data[1][1]="admin";
+          password2-->data[1][2]="jO2/kVIsw^V3";
+ 
+[or]
+====================================
+Breakout Session : Enter Salesforce username and password in the text fields to ensure JSON data parameterization :
+====================================
+Salesforce url : https://login.salesforce.com/?locale=in 
+
+username1 : dilipkumar.rajendran@testleaf.com
+password1:  TestLeaf@2025
+
+username2 : ravindran.ramdas@testleaf.com
+password2:  Ravisalesplay#1234
+
+------------------------------------------------------------------
+
+# Day 08 Session Recap - Playwright Advanced Handling
+ 📋 Overview
+Yesterday's session covered three advanced Playwright testing scenarios: Alert/Dialog Handling, Frame Handling, and Window/Tab Handling.
+---
+ 1. Alert Handling (`Alert.spec.ts`)
+# Key Methods:
+- `page.once('dialog')` - Handles a single alert event
+- `page.on('dialog')` - Handles multiple alert events
+- `alertType.message()` - Extracts alert message
+- `alertType.type()` - Gets alert type (alert/confirm/prompt)
+- `alertType.accept()` - Click OK button
+- `alertType.dismiss()` - Click Cancel button (implied)
+# Test Approaches:
+1. Auto Dismiss - Playwright auto-dismisses alerts by default
+2. Page.Once - Handle first alert only
+3. Page.On - Handle multiple alerts with conditional logic based on type
+# Important Notes:
+====================================
+- Use page.on() for multiple alerts
+- Use page.once() for single alert scenarios
+- Auto-dismiss is default Playwright behavior
+====================================
+---
+ 2. Frame Handling (`Frame.spec.ts`)
+# Key Methods:
+- `page.frames()` - Returns array of all frames (index-based)
+- `page.frameLocator(selector)` - Direct frame selection by CSS/XPath
+- `page.frame({url})` - Select frame by URL property
+# Test Approaches:
+1. Frame by Index - Access frames via `page.frames()[index]`
+2. Frame Locator - `page.frameLocator("selector").locator()`
+3. Frame by URL - `page.frame({url: 'specific-url'})`
+# Important Notes:
+====================================
+- Frames array includes main page as [0]
+- Nested frames can be accessed by index
+- Frame index: [0]=main, [1]=1st frame, [2]=2nd frame, etc.
+====================================
+---
+ 3. Window Handling (`Window.spec.ts`)
+# Key Methods:
+- `page.context().waitForEvent('page')` - Capture new window/tab event as promise
+- `page.locator(selector).click()` - Trigger child window opening
+- `childWindow.title()` - Get title of child window
+- `childWindow.locator(selector)` - Perform actions on child window
+# Test Approach:
+1. Create promise to wait for new page
+2. Perform action that opens new window
+3. Resolve promise to get child window reference
+4. Interact with child window
+# Important Notes:
+====================================
+- Always wrap waitForEvent() in promise BEFORE triggering action
+- Use await to resolve the promise after action
+- Child window is accessed via the resolved promise variable
+====================================
+ 4. storage State
+---
+*one of those Playwright features that looks small but quietly solves one of the biggest automation headaches 
+ever invented: logging in again and again and again.
+
+🔬 What storageState() actually does
+=====================================
+
+await context.storageState({ path: 'auth.json' });
+
+This command says:
+
+“Take everything that proves this user is logged in and serialize it into a file.”
+
+It captures:
+
+✅ Cookies
+✅ Local Storage
+✅ Session Storage (origins-based)
+
+It does NOT save DOM, tabs, or UI state.
+
+Only authentication-related browser storage.
+
+
+---
+ 🎯 Quick Reference Table
+
+| 	Feature	 	| 		Method 		  | 	Use Case 	|
+|-----------------------|---------------------------------|---------------------|
+| Single Alert 		| `page.once('dialog')` 	  | Handle one alert	|
+| Multiple Alerts 	| `page.on('dialog')` 		  | Handle many alerts 	|
+| Frame by Index 	| `page.frames()[index]` 	  | Access nested frames|
+| Frame by Selector 	| `page.frameLocator()` 	  | Direct CSS/XPath access |
+| Frame by URL 		| `page.frame({url})` 	 	  | Match by URL property|
+| New Window 		| `waitForEvent('page')` 	  | Capture child window |
+
+---
+
+ ⚡ Key Takeaways
+✅ Use `.on()` for event listeners that need to handle multiple occurrences  
+✅ Frames are zero-indexed; main page is always [0]  
+✅ Always create promise BEFORE triggering new window  
+✅ Type checking (`if/else`) useful for different dialog types  
+
+
+
+
+📝 Keep your physical notebook and pen handy to sketch out ideas!
+------------------------------------------------------------------------------------
+# File Upload
+--------------
+👆 Button → 🟨 JS Listener→ 👻 Hidden Click → 🛡️ Security Check → ✅ Trusted? →  
+
+📂 File Picker → 👤 Pick File → 📝 Update → 📦 Files Read  →   🔥 Event → ⚙️ JS Handler → 👀 Preview/Upload 
+
+ 
+Definition:
+	Uploading files into a web application using Playwright.
+	Playwright simulates attaching files to `<input type="file">` elements or drag-and-drop areas.
+---
+	 When `type="file"` is Present
+	 Directly set the file(s) to the input element.
+		const fileInput = page.locator('input[type="file"]');
+		await fileInput.setInputFiles('tests/data/sample.pdf');
+
+* Multiple Files:
+await fileInput.setInputFiles(['file1.png', 'file2.png']);
+---
+ When `type="file"` is Not Present (Custom Upload UI)
+
+Some apps hide the `<input>` or use a styled button (drag-drop zones).
+
+tsconfig.json file :
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
+    "types": ["node"] ,
+    "resolveJsonModule": true
+  }
+}
+====================================
+
+
+----
+path.join()
+============
+This line tells Playwright where to save the downloaded file.
+=============================================================
+Now let’s focus on this part:
+
+path.join(__dirname, ../../Data, download.suggestedFilename())
+
+🔹 1. path.join()
+-----------------
+*Comes from Node.js’s built-in path module.
+*It is used to safely combine multiple parts of a file path.
+*It automatically adds / or \ depending on your operating system (Windows, macOS, Linux).
+
+
+
+
+👉 Example:
+
+path.join("folder", "subfolder", "file.txt")
+
+Result (on Windows):
+--------------------
+folder\subfolder\file.txt
+
+Result (on Mac/Linux):
+-----------------------
+folder/subfolder/file.txt
+
+So, path.join() helps build paths without worrying about slashes.
+
+🔹 2. __dirname
+It’s a special variable in Node.js.
+It gives the absolute path of the current JavaScript/TypsScript file’s directory.
+
+👉 Example: If your file is located in:
+-----------------------------------------
+File path : C:\Projects\Playwright\Tests\Day09\DownloadTest.js
+
+Then:
+------
+console.log(__dirname)
+
+will print:
+--------------
+C:\Projects\Playwright\Tests\Day09
+
+🔹 3. ../../Data
+This part means:
+
+Go two folders up from the current directory (../ twice).
+Then go inside the “Data” folder.
+
+So if your current file is:
+---------------------------
+ C:\Projects\Playwright\Tests\Day09\DownloadTest.js
+
+Then ../../Data points to:
+---------------------------
+C:\Projects\Playwright\Data
+
+🔹 4. download.suggestedFilename()
+This gives the original name of the file being downloaded (like report.pdf, image.png, etc.).
+
+Playwright reads this automatically from the browser’s download info.
+--------------------------------------------------------------------
+
+✅ "join" is Putting it all together
+path.join(__dirname, `../../Data`, fDown.suggestedFilename())
+
+➡️ means:
+
+Start from the folder where this test file is located (__dirname)
+➡️
+Move two levels up to reach the main project folder
+➡️
+Go inside the Data folder
+➡️
+Add the original file name automatically suggested by the browser.
+
+Result example:
+----------------
+C:\Projects\Playwright\Data\MarPw-2.png
+
+
+Notes:
+* Default: Playwright saves downloads in a temporary directory.
+* Always use `Promise.all` to avoid missing the download event.
+--------------------------------------------------------------------------------------
+
+https://the-internet.herokuapp.com/upload
+Steps:
+1. Inspect and find the hidden file input.
+2. Use `setFiles` on that hidden element.
+
+
+Example :
+const fileChooser = page.waitForEvent('filechooser',{timeout:10000})
+    await page.click('#drag-drop-upload');
+    const loaded = await fileChooser
+
+
+If the input is not accessible at all → Workaround is to use OS-level automation (not Playwright’s scope).
+
+
+## Real Problems & Solutions 🚨
+
+| **Problem**            |        **Solution** |
+|------------------------|---------------------|
+| ❌ CI/CD upload fails | ✅ Check file paths |
+| ❌ Hidden file inputs | ✅ Use FileChooser |
+| ❌ Drag-drop uploads | ✅ Use direct input |
+| ❌ Headless mode | ✅ Debug with screenshots |
+
+---
+# File Download
+===============
+🎯 Same Format as Your Example: 
+
+👆 Button → 🌐 HTTP Request → 🖥️ Server Response → 📋 Header Check → ❓ attachment? 
+
+➡️ ✅ Yes → 📂 Download Manager → 💾 Save Dialog → 👤 Pick Folder → ⚙️ Download Starts → 📊 Progress → ✅ File Saved 
+➡️ ❌ No (inline) → 👁️ Display in Browser → 🔧 Viewer Loads → 👤 Manual Save Option 
+================
+
+Definition :
+Handling files downloaded by the application (clicking "Download" links/buttons).
+
+
+ Usage : 
+
+Playwright provides a `page.waitForEvent('download')` listener.
+
+const [download] = await Promise.all([
+  page.waitForEvent('download'),      // Wait for download event
+  page.click('text=Download Report')  // Trigger download
+]);
+
+// Save to desired path
+await download.saveAs('downloads/report.pdf');
+
+// Get file path in temp location
+console.log(await download.path());
+
+
+## How to use timeStamp while saving a downloaded file. :
+=========================================================
+We want a safe unique time string to use in a filename.
+Because this is invalid in Windows:
+```
+Download_10:45:30.png   ❌ (colon not allowed)
+```
+So we convert time into a file-friendly format.
+## Line 1
+new Date()
+Means:
+👉 *“Give me the current date and time of the system”*
+Example output (internally):
+```
+Sun Feb 08 2026 10:45:30 GMT+0530
+```
+## Line 2
+```
+.toISOString()
+```
+Means:
+👉 “Convert the date into a standard string format”
+Output:
+```
+2026-02-08T10:45:30.123Z
+```
+This is:
+YYYY-MM-DDTHH:MM:SS.msZ
+## Line 3 (Most Important)
+.replace(/[:.]/g, "-")
+Means:
+👉 *“Replace all `:` and `.` with `-`”*
+Because Windows does not allow `:` in filenames.
+So:
+Before:
+2026-02-08T10:45:30.123Z
+After:
+2026-02-08T10-45-30-123Z
+---
+## Final Result Stored in `timestamp`
+const timestamp = "2026-02-08T10-45-30-123Z"
+Used in filename:
+Download_2026-02-08T10-45-30-123Z.png
+## One-Line Analogy for Learners
+> "We take current time → convert to string → clean it so Windows accepts it as a filename."
+
+## Interview-Ready Explanation
+If asked in interview:
+> *“We use `toISOString()` to get a standard timestamp and `replace()` to remove invalid filename characters, so each downloaded file is uniquely and safely named.”*
+
+
+
+| **Upload ⬆️** | **Download ⬇️** |
+|---------------|-----------------|
+| Local → Server | Server → Local |
+| Uses `input.files` | Uses `download` event |
+| Needs file picker | Needs permission |
+| `change` event | Network response |
+
+
+=========================================================================
+Parameterization is one of those ideas that sounds fancy but is actually very human logic:
+*Run the same behavior with different inputs without rewriting the test.
+*Instead of writing ten tests that differ only by data, you write one test + many data values.
+*Automation stops being copy-paste and starts behaving like a scientific experiment: same procedure, different variables.
+
+🧠 Simple real-world analogy
+=============================
+Imagine testing a login page.
+
+You could write:
+
+Test login with user1
+Test login with user2
+Test login with user3
+
+That’s repetition disguised as productivity.
+
+Parameterization says:
+One login test
+→ run with multiple usernames/passwords
+
+Same logic. Different data.
+------------------------------------
+✅ Parameterization in Playwright
+===================================
+Method 1 — Parameterization using JSON file
+Method 2 — Parameterization using CSV/Excel file
+Method 3 — Environment parameterization[Dev,Qa,UAT,Prop]
+
+
+# Data Parameterization with JSON
+------------------------------------
+Definition
+Feeding test data from external JSON files instead of hardcoding values.
+Useful for data-driven testing.
+
+🧠 What is JSON?
+JSON = JavaScript Object Notation
+A text format for structured data that humans & machines both love 💕
+
+json
+{
+  "name": "Bhuvi",
+  "role": "SDET",
+  "experience": 7,
+  "skills": ["Playwright", "TypeScript", "Selenium", "Java", "Automation"]
+}
+Building Blocks: 📦
+
+{} Objects ---> { key : value }
+[] Arrays  ---> [ value1, value2 ] ex : ["Playwright", "TypeScript", "Selenium", "Java", "Automation"]
+📝 Strings ---> "name": "Bhuvi",
+🔢 Numbers --->  7
+✅ Boolean --->  true
+🚫 null
+
+No functions. No logic. Just pure data. — That's the magic! ✨
+
+📜 Born: 2001 👶
+👨‍💻 Douglas Crockford realized:
+
+"JavaScript already has clean object syntax — why invent something new?"
+
+Timeline:
+
+🚀 2006–2007 → AJAX web apps explode
+
+📋 2013 → Standardized as ECMA-404
+
+🌍 Today → Internet's default data language
+
+😫 Before JSON: The XML Era
+xml
+<user>
+  <name>Bhuvi</name>
+  <role>SDET</role>
+</user>
+XML Problems: ❌
+
+📜 Verbose (tags everywhere!)
+🐌 Heavy parsing
+😤 Hard to work with
+📦 Big network payloads
+
+XML felt like legal contracts. JSON felt like sticky notes. 📝
+
+🚀 Why JSON Won
+Reason	Why It Mattered
+=======================
+⏱️ Perfect Timing	Web apps (Gmail) needed constant server chat
+🔤 Native to JS	        JSON.parse(data) — instant objects!
+👀 Human-readable	Debug by looking — no archaeology required
+🌎 Language-agnostic	Java, Python, C#, Rust — everyone speaks JSON
+🔌 API Perfect	        REST APIs became JSON machines
+
+🔬 Why Simplicity Won
+JSON deliberately removed: ❌
+
+💬 Comments
+🎭 Custom types
+⚙️ Executable code
+
+Result: ✅
+
+🔒 Safe
+📊 Predictable
+⚡ Fast to parse
+📦 Light to transmit
+
+"The most successful technologies remove power, not add it." 💡
+
+🧩 Where You See JSON Daily
+---------------------------
+Place			Example
+🧪 Playwright Tests	API responses
+⚙️ Config Files		package.json, tsconfig.json
+🔑 Auth			Storage state, tokens
+☁️ Cloud			Microservices chat
+🗄️ Databases		NoSQL, exports
+
+⚡ Fun Historical Irony
+------------------------
+Engineers once dismissed JSON as "informal" compared to XML's "serious" standards.
+
+Then reality happened: 👇
+Developers voted with productivity. 🗳️
+The internet quietly reorganized itself around JSON.
+
+🧠 Mental Model to Keep Forever
+JSON = The spreadsheet of the internet
+Structured rows of meaning, readable by everyone.
+
+🎯 One-Liner Takeaway
+JSON didn't invent data exchange — it just made it feel obvious. ✨
+
+
+🔬 Why parameterization matters (real engineering reason)
+
+Without it:
+
+*duplicated tests
+*maintenance nightmare
+*bug fixes repeated everywhere
+
+With it:
+
+*one logic source
+*unlimited test coverage
+*cleaner reporting
+
+You change logic once → affects all datasets.
+
+# ============================================
+# 📦 DATA PARAMETERIZATION WITH JSON
+# ============================================
+
+# 📖 DEFINITION:
+# ============================================
+# JSON → JavaScript Object Notation
+# Feeding test data from external JSON files instead of hardcoding values
+# Useful for DATA-DRIVEN TESTING
+
+# ============================================
+# 📁 SAMPLE JSON STRUCTURE (testData.json)
+# ============================================
+
+# [
+#   {
+#     "TcaseId": "TC001",
+#     "Username": "demoSalesManager",
+#     "Password": "crmsfa"
+#   },
+#   {
+#     "TcaseId": "TC002",
+#     "Username": "demoCSR",
+#     "Password": "crmsfa"
+#   }
+# ]
+
+# ============================================
+# 🚀 STEP BY STEP PROCESS
+# ============================================
+
+# ┌─────────────────────────────────────────────────┐
+# │  STEP 1 📂 CREATE JSON FILE                     │
+# ├─────────────────────────────────────────────────┤
+# │  → Create a .json file inside the Data folder   │
+# │  → Define test data in JSON format              │
+# │  → Use array of objects for multiple test cases │
+# └─────────────────────────────────────────────────┘
+
+# ┌─────────────────────────────────────────────────┐
+# │  STEP 2 📥 IMPORT JSON INTO SPEC FILE           │
+# ├─────────────────────────────────────────────────┤
+# │  → Create a .spec.ts file                       │
+# │  → Import data using:                           │
+# │    import testData from "./Data/xxx.json";      │
+# │   						                                  │
+# └─────────────────────────────────────────────────┘
+
+# ┌─────────────────────────────────────────────────┐
+# │  STEP 3 🧪 USE IN TEST CASES                    │
+# ├─────────────────────────────────────────────────┤
+# │  → Loop through imported data                   │
+# │  → Access values using keys                     │
+# │  → Example: testData.Username                   │
+# │  → Perform validations with test data           │
+# └─────────────────────────────────────────────────┘
+
+# ┌─────────────────────────────────────────────────┐
+# │  STEP 4 ▶️ RUN THE TEST                         │
+# ├─────────────────────────────────────────────────┤
+# │  → Execute the spec file                        │
+# │  → Test runs multiple times with different data │
+# │  → Observe data-driven testing in action        │
+# └─────────────────────────────────────────────────┘
+
+# ============================================
+# 💡 QUICK CODE REFERENCE
+# ============================================
+
+# import credentials as loginData from "./Data/loginData.json";
+# 
+# describe("Data Driven Login Test", () => {
+#   for((let data of credentials)
+#    test(`Test ${data.TcaseId}`, async({page}) => {
+#
+#      fill(data.Username);
+#      fill(data.Password);
+#      page.locator("#loginBtn").click();
+#     });
+#   });
+# });
+
+# ============================================
+# ✅ BENEFITS
+# ============================================
+
+# ✓ No hardcoded values in test scripts
+# ✓ Easy to add/modify test data
+# ✓ Separate data from test logic
+# ✓ Reuse same test with multiple datasets
+# ✓ Perfect for regression testing
+
+
+
