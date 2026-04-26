@@ -1,0 +1,96 @@
+
+Agenda
+Data Parametrization
+  -csv
+  -env
+Test Annotations and features 
+Codegen
+
+
+
+CSV:
+---
+comma separated file
+empId,empfname,lname,address,phno
+emp011,Mahalakshmi ,K,Chennai,7890763670
+emp022,Kishore,s,Vellore,988900387
+Step:1 
+ npm install csv-parse
+   -->JSON structure->key -->value
+   [{empID:""}]
+  npm install fs -->file system library
+
+step:2
+ create a csv file 
+  .csv
+step:3
+
+parse(fs.readFileSync("filepath"),{
+     columns:true  -->makes the first row of the csv file as header/columname ->key for the rows
+})
+
+
+env file
+--------
+step:1 -->npm insatll dotenv
+step:2 -->filename.env
+    in this file -->create dataset as 
+    Base_url=https://leaftaps.com/opentaps/control/main
+  LT_username=demoCSR
+  LT_password=crmsfa
+step:3 -->read the file
+    import dotenv from 'dotenv'
+dotenv.config({path:'utils/prod.env'})
+
+test(`Learning Env to read the data`,async({page})=>{
+  console.log(process.env.LT_username)
+})
+
+parametrize the file name under test
+multiple configuration files (playwright.config.ts)
+
+
+const filetoread=process.env.EnvFile || 'qa'
+
+EnvFile=qa/prod
+dotenv.config({path:`utils/${filetoread}.env`})
+                          staging.env
+                          prod.env  
+                    in terminal 
+                    $env:EnvFile='staging' -->data will be read from staging.env
+                    data by default read from qa
+Configuration from package.json
+npm install run
+in package.json
+script:{
+"run-commonfiles": "npx playwright test --config=playwright.config.ts",
+    "run-qa": "npx playwright test learntoreadmultipleENV.spec.ts --config=playwright.qa.config.ts",
+    "run-prod": "npx playwright test learntoreadmultipleENV.spec.ts --config=playwright.prod.config.ts",
+    "run-all": "npm run run-qa && npm run run-prod "
+}
+to execute from package.json 
+in terminal -npm run run-qa
+to run all combinations
+  install run -all
+   npm run-all
+   npm run run-all
+
+
+Test Annotation: /Test Runner
+test.only --only  the annotated test will run
+test.skip -->ignore the specific test from execution
+test.fixme-->says that the business logic need s to be fixed/has ui bug
+test.slow -->to slow down the execution 3x the default 
+test.info -->give info of the test for reporting purpose and also gives the status
+test.describe -->group the test 
+  by default all the test in  a spec.ts will run sequentially
+     serial() -similar to sequential , but here one test is dependent on the previous test status
+     parallel()
+     configure()
+test.beforeAll -->runs once before all the test()
+test.beforeEach ->run foe each test method
+test.afterEach ->runs after each testmethod
+test.afterAll ->runs once after all the test methods
+
+cli 
+ run the test files using  grep -->global regular expression print
