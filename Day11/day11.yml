@@ -1,0 +1,166 @@
+Agenda
+--------
+ Recap
+ API Introduction
+ Headers 
+ Break 
+ API with Postman (CURD operation)
+ Classroom
+ Global Variables
+ Classroom
+
+ API -Application Programming Interface
+ (backend)
+  connecting two diiferent -Application
+  client -server communication
+
+  ->api based
+  ->faster
+  ->ease to generate data
+  ->no related to any browser (no ui is needed)
+
+  documentation ->swagger/api documentation
+
+  To test API 
+    URL /endpoint url
+      http:/mydomainName.com/api..../
+       http:/mydomainName.com/api/Lead -endpoint
+       https://www.amazon.ca/s?k=samsung
+
+       parameter -->resources and specific need
+       query parameter ?
+       path parameter
+       http:/domainName.com/pathparamter/queryparameter
+    Header Methods (verbs)
+       POST -->create a new resources
+       GET -->Fetch the >resources
+       PATCH-->Upadate a specific field of an exixting >resources
+       DELETE -->Delete the complete >resources
+
+       PUT-->To update the whole resource details (replacing the full resource info)
+             creates new
+patch http:/mydomainName.com/api..../12345
+       {       
+       Department:"Test"
+       }
+
+put http:/mydomainName.com/api..../12345
+      {
+       name:""         
+       Department:"Test"
+       }
+
+    Body/payload
+      {       
+       "Department":Test""
+       }
+
+    Authentication -who you are
+    username 
+    password
+    apikey 
+
+    Authorization -what permission 
+    tokens
+     oauth -->open Authorization
+     jwt ->oracle based tokens
+     
+   social sign on   
+  etsy-->google credentials-->google server-->token-->etsy application server
+  single sign on -->microsoft (inside the org)
+     
+    status
+    success/failure
+    100 ->information
+    200 ->resource based - success message
+    300 -->redirectional 
+    Failures
+    400 ->errors ->client side 
+    500 -->server side
+
+1. Creating the resource
+ POST endpoint url
+ https://dev324532.service-now.com/api/now/table/incident
+ Authorization 
+  Basic Auth -->username admin
+                password AupH4z@O+Hp5
+ Headers
+   content-type : application/json
+
+ Body
+  {
+  "short_description": ""}
+
+  send 
+
+  response as 201 created
+  response body
+
+2. Update  the resource
+ PATCH endpoint url
+ https://dev324532.service-now.com/api/now/table/incident/sys_id
+ Authorization 
+  Basic Auth -->username admin
+                password AupH4z@O+Hp5
+ Headers
+   content-type : application/json
+
+ Body
+  {
+  "description": ""
+  }
+
+  send 
+  response as 200 ok
+  response body
+
+  
+3. delete the resource
+DELETE endpoint url
+ https://dev324532.service-now.com/api/now/table/incident/sys_id
+ Authorization 
+  Basic Auth -->username admin
+                password AupH4z@O+Hp5
+ Headers
+   content-type : application/json
+
+  send 
+  response as 204 No content
+
+4.GEt the resource (particular resource)
+ POST endpoint url
+ https://dev324532.service-now.com/api/now/table/incident/sys_id
+ Authorization 
+  Basic Auth -->username admin
+                password AupH4z@O+Hp5
+ Headers
+   content-type : application/json
+
+  send 
+  response as 200 ok
+  response body
+  
+4.GEt the resource (all resource)
+ POST endpoint url
+ https://dev324532.service-now.com/api/now/table/incident
+ Authorization 
+  Basic Auth -->username admin
+                password AupH4z@O+Hp5
+ Headers
+   content-type : application/json
+
+  send 
+  response as 204 No content
+  response body
+
+
+  environment specific -->env
+  global -->use the variables in all the collections 
+  collection variable
+
+Servicenow
+  
+https://dev324532.service-now.com
+AupH4z@O+Hp5
+
+
