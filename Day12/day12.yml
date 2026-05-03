@@ -1,0 +1,34 @@
+Agenda
+--------
+Recap
+API Integration with Playwright(Post and Get-servicenow)
+Classroom
+Break 
+End to End Scenario (SalesForce)
+Classroom
+grep,testMatch,codegen
+visual regression 
+
+Playwright with API
+
+APIRequestContext -->library
+  associated with browsercontext
+  object from browsercontext using the library apirequestcontext
+  login -->session info -->browserContext
+   page.context()-->sessionstorage 
+     shared -->both ui testing and api testing
+     login -->post (data)-->validate the response
+
+
+npm install @faker-js/faker --save-dev
+
+global regular expression print
+
+ //repeatEach:2, //to confirm the flakiness on execution repeat the test as needed
+  //grep:[/'smoke'/,/'regression'/], //execute the set of files which the given test title
+  //testMatch:["/tests/Day12/**.spec.ts",""], //execute the set of given files
+  //testIgnore:["/tests/Day12/**.spec.ts"],//ignore the file from execution 
+  //grepInvert:[/"Create"/,/"Login"/], //ignore the file from excution -matching with test title
+
+  codegen ->code generator
+   npx playwright codegen -o /day12/codegen.spec.ts 
