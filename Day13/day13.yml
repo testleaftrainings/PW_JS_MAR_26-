@@ -1,0 +1,103 @@
+Agenda
+------
+Recap
+Introduction to OOPs & Classes & Object
+Constructor & Access modifier
+Break
+Inheritance
+Classroom
+Polymorphism
+Classroom
+Abstraction
+classroom
+
+
+OOPS- Object oriented Programming
+
+Reusability
+Modularity
+Avoid redundant codes
+Flexbility
+Scalability
+
+Javascript and Typescript ->oops concept
+  -->prototype based oop concept -js
+  -->ts takes the strict structure which in turn works like prototype
+Classes and object
+  Inheritance
+  Polymorphism
+  Encapsulation 
+  Abstraction
+
+Class -->blueprint /template ->properties and methods (data and action)
+  
+LoginPage
+   username prop
+   password prop
+   clickLogin method
+
+ Object -->Using same template of loginpage
+   -->real world entity
+  salesforce
+  servicenow
+  leaftaps
+  amazon
+  uber
+  swiggy
+
+
+class className{
+ define the propery
+ methodName(){}
+}
+
+const obj=new className()   -->constructor--> creates reference to the class
+
+
+Create a class as Browser
+define the >properties
+username password
+define a parametrized Constructor
+     takes the input as browserName
+define normal method as loadurl(pass the url infor)
+define normal method as enterUsername takes the input of username
+define normal method  as enterPassword takes the input of password
+create a obj with parametrized constructor -->pass the value ("")
+obj.loadUrl("")
+obj.enterUsername("")
+obj.enterPassword("")
+
+
+Access modifier
+----------------
+permission for the class property/methods
+
+public -->all the classes
+private -->owner of the class /no read / write acces for the other class
+protected -->will accessible inside the inherited
+readonly -->final data -read only witout write access
+
+Encapsulation
+  placing the property and methods under one class using private keyword 
+  wrapping the property(data)and methods into a single class(unit) and it is acheived with the help of private keyword
+  getter and setter to povide permission to the other class
+
+
+Inheritance
+  inheriting the properties/methods from parent class/base class to subclass/derived class/child class
+  building the relationship between two classes 
+  IS-A relationship 
+  using the keyword extends 
+
+  single Inheritance
+   parentclass->subclass 
+  Multi level Inheritance
+   baseclass->parentclass->subclass
+  Hirerchial
+    parent class ->childclass1
+    parent class->child class2
+
+  Multiple Inheritance is not supported
+    child class-->parent 1 , parent 2
+    a child class cannot inherit from two parent classes
+  class UserProfile extends LoginPage,HomePage
