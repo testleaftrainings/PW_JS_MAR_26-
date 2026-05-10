@@ -1,0 +1,64 @@
+Agenda
+------
+Polymorphism
+Abstraction
+POM with custom Fixtures
+Classroom
+Jira Integration
+visual regression
+
+---------------
+Polymorphism -->taking many forms
+ overloaded with multiple inputs
+ overriden with different implementation  -with inheritance 
+  parent class has a implentatation and the child classes the same method with differnt implementation
+    method name same and the usage is different
+
+this-->acces the current class method/property
+super-->to access the parent method/property with inheritance 
+
+Abstraction - hiding the implemtation details and showing only the required info
+
+abstract class -useful to create the wrapper methods
+  0-100%
+   implemented and unimplemented 
+   class methods with logic or without logic
+     click(){page.fill()
+         page.press("Enter")}
+     typeAndenter()
+
+     -works in the way of inheritance
+     extends
+
+interface -setup a rule 
+ 100% 
+ clickandtab() -->without logic
+ uses ->keywords implements for a normal class
+
+ multiple inheritance acheived at interface level not at class level
+
+Page object model
+  creating class objects for each navigation in an application
+
+  launch-->enterusername and password with login button --(Loginpage)
+                                            |              |
+                                            |             |
+                                            crmclick and logout (WelcomePage)
+                                            |
+                                            Leads,Accounts,Opportunity (MyhomePage)
+                                              |
+                                              createLead,MergeLead(Leads),FindLeads
+                                              |
+                                              CreateLeadForm (comapnyname,fname,lastname,submit)
+                                              |
+                                              ViewLead (viewLeadPage)
+                                               |
+                                               Edit
+
+
+custom fixture -->injecting the page object/classobjects into the test function 
+
+
+
+
+
