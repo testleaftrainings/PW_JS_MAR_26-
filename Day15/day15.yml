@@ -1,0 +1,40 @@
+Agenda(Saturday)
+-------
+Jira Integration
+Break
+Webtable 
+ShadowDom
+Visual Regrssion Testing
+Device Emulation
+Geolocation
+
+
+Agenda(Sunday)
+-------
+Network Interception
+GithubActions/CICD-reporter
+Framework walkthrough 
+Playwright with MCP
+
+
+
+Jira api integration:
+---------------------
+endpoint
+domain_crendtials
+ apikey
+ ATATT3xFfGF0omUCPTBenLbpBS05IUC3CkqDIvChA8-RaUVX3C_tB1jjNvbd9DPTIvGgtAvIgQFC74HmoSzq0t8ZxVmuJgEk6xXBuLlnJ9R8r2_ttfeG3Px3a6nVQ1F0kwbWu67GqsT3lLPDkSYO6HKFo033LOsp8e5tQ7fsK4-cTP8SxH4CIS8=B337A893
+ projectID -SCRUM
+
+PW ->APIRequestContext-->e2e
+page.request
+request.post
+
+test({page,request})
+
+jira ->JiraClient
+
+node.js  library -->axios ->any 3rd party 
+install >axios
+ npm install axios
+
