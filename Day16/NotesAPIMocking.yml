@@ -1,0 +1,172 @@
+🎯 What are we trying to achieve here?
+
+When Salesforce tries to call its backend API:
+
+POST  /aura?preloadActions
+
+
+👉 We don’t want the real server to respond
+👉 We want Playwright to pretend to be the server
+👉 And send a fake (mocked) response
+
+This helps in:
+
+Testing UI without backend dependency
+
+Faster tests
+
+Stable tests (no flaky APIs)
+
+Learning network behavior safely
+
+🧩 Step 1: Creating a Mocked Backend Response
+const mockedResponse = {
+  actions: [
+    {
+      id: "1",
+      status: "SUCCESS",
+      returnValue: { message: "This is a mocked response" }
+    }
+  ]
+};
+
+ What is this object?
+
+This is fake data that looks like a real Salesforce Aura response.
+
+Salesforce Aura framework usually returns data in this structure:
+
+Field	Meaning
+actions	List of backend actions executed
+id	Unique action ID
+status	Result of backend call (SUCCESS, ERROR)
+returnValue	Actual data sent back to UI
+
+ We are imitating Salesforce backend behavior
+
+ Why this structure matters?
+
+Front-end code expects:
+
+response.actions[0].status === "SUCCESS"
+
+
+If we return something else → UI may break.
+
+So mock must match real API shape, not random JSON.
+
+🖨️ Step 2: Logging the Mocked Response
+console.log(
+  `Mocked Response Body:\n${JSON.stringify(mockedResponse, null, 2)}`
+);
+
+🔍 What is happening here?
+
+JSON.stringify() converts JS object → JSON string
+
+null, 2 formats it nicely (indentation)
+
+📌 Output looks like:
+
+{
+  "actions": [
+    {
+      "id": "1",
+      "status": "SUCCESS",
+      "returnValue": {
+        "message": "This is a mocked response"
+      }
+    }
+  ]
+}
+
+ Why log this?
+
+Debugging
+
+
+Verifying mock correctness
+
+ Step 3: Fulfilling the Request (MOST IMPORTANT)
+await route.fulfill({
+  status: 200,
+  contentType: "application/json",
+  body: JSON.stringify(mockedResponse)
+});
+
+🔥 This is the core of mocking
+
+Here, Playwright says:
+
+❌ Don’t send request to Salesforce
+✅ I will respond on behalf of the server
+
+🧩 Breakdown of route.fulfill()
+Property	Meaning
+status: 200	HTTP success response
+contentType	Tells browser this is JSON
+body	Actual response payload
+
+📌 From browser’s point of view:
+
+“I called Salesforce and got a valid response”
+
+But actually → Playwright faked it 😎
+
+🔁 Step 4: Why else { route.continue() }?
+} else {
+  await route.continue();
+}
+
+🤔 Why is this needed?
+
+Your page.route() intercepts ALL matching requests.
+
+We mock only POST
+
+Other requests (GET, OPTIONS, etc.) should go to real server
+
+Without this?
+
+❌ Requests will hang
+❌ Page may never load
+❌ Test will timeout
+
+🧠 Simple Analogy (Great for Learners)
+
+Think of this like Phone Call Redirection ☎️
+
+App → calls Salesforce backend
+
+Playwright intercepts the call
+
+Playwright says:
+
+“No need to call Salesforce, I’ll answer for you”
+
+And answers with:
+
+{
+  "status": "SUCCESS",
+  "message": "This is a mocked response"
+}
+
+🧪 What happens in the UI?
+
+Because of:
+
+status: "SUCCESS"
+
+
+👉 Salesforce UI believes login & preload worked
+👉 App launcher loads
+👉 Test proceeds smoothly
+
+Even if:
+
+Backend is slow
+
+Backend is down
+
+Credentials are fake
+

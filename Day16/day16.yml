@@ -1,0 +1,68 @@
+Agenda(Sunday)
+-------
+Network Interception
+GithubActions/CICD-reporter
+Framework walkthrough 
+Playwright with MCP
+
+
+static table-->fixed rows and columns 
+dynamic table-->table rows and columns will change 
+
+
+Network interception 
+  abort the apicalls  -->route.abort()
+  mock the request(faking)-->route.fulfill()
+  mock the response -->payment 
+  route.continue()
+
+ page.route('api',(route,request)=>{})
+
+
+GithubAction 
+ connect the vs code with Github account
+  profile-->turn on cloud changes 
+
+  create a folder .github
+                    workflow
+                      playwright.yml
+
+git vs github
+
+git is software for version controlling
+
+github storage-repository
+
+git init --initializing the git local
+git add . -->it will all the codes (staging)
+  git add filename
+git commit -m "commit message"  message should be meaningful 
+public repos
+git remote add origin https://github.com/vidya1926/Playwright_Mar_26.git  //connect remote response
+git push
+
+private repos
+ invite for collaboration
+
+ git config -g user.email "vidyar1926@gmail.com"
+ git config -g user.name "vidya1926"
+
+ rsa 
+ git remote add origin
+ git push
+
+git clone
+
+
+merge conflict only when the changes happens in the same file
+pull the code 
+resolve the conflict
+add
+commit and push the code
+
+
+MCP -->Model context protocol
+
+I-Instruction
+C-context
+E-example

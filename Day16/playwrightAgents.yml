@@ -1,0 +1,60 @@
+
+Prerequisites
+
+ Node.js (v18+ recommended) and npm installed.
+ A terminal and (optionally) VS Code.
+ Basic familiarity with terminal commands.
+ Project folder created (e.g., leaftaps-playwright).
+
+Step 1 — Initialize Playwright project
+Run the Playwright initializer (includes example prompts):
+npm init playwright@latest
+Follow prompts (choose TypeScript if asked). This creates a Playwright project scaffold.
+
+Step 2 — Install Playwright Test (latest)
+npm install -D @playwright/test@latest
+Confirm package.json has @playwright/test in devDependencies.
+
+Step 3 — Initialize the agents
+In the project root run (choose the client you will use). Example for VS Code loop:
+
+npx playwright init-agents --loop=vscode
+
+After this, inspect what was added. Look for:
+.github/chatmodes/ # or similar folder
+├─ planner/ # prompts & config for Planner
+├─ generator/ # prompts & config for Generator
+└─ healer/ # prompts & config for Healer
+These contain prompts and agent definitions (Planner, Generator, Healer).
+
+
+Prompt in Planner Agent :
+
+BaseURL :
+https://leaftaps.com/opentaps/control/main
+
+Use the below credentials to login :
+Username : demosalesmanager
+Password : crmsfa
+
+Create a new lead in a below page :
+https://leaftaps.com/opentaps/control/createLeadForm
+
+------------------------------------------------------------------
+
+Prompt in Generate Agent :
+
+(Note : Attach the planner file to the agent before running this prompt._
+
+
+You are a Playwright test code generator.
+Generate a Playwright test code to create a new lead in the leaftaps application using the attched planner file.
+
+
+
+Prompt in Healer Agent :
+
+If any test is failing, analyze the failure reason and provide steps to fix it.
+Provide the fixed code snippet only without any explanation.
+
+
